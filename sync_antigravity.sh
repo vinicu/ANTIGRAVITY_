@@ -19,6 +19,9 @@ fi
 git add .
 git commit -m "Auto-save: Antigravity sync - $(date '+%Y-%m-%d %H:%M:%S')"
 
+# Desativa helper de credenciais local para evitar conflito com keychain do macOS
+git config --local credential.helper ""
+
 # Usa o token para autenticar sem salvar no config global
 git push https://vinicu:${GITHUB_TOKEN}@github.com/vinicu/ANTIGRAVITY_.git main
 
