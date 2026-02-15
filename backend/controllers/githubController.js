@@ -13,7 +13,7 @@ exports.syncAntigravity = async (req, res) => {
 
         // Configura URL remota com token de forma segura (em memória para o comando push)
         // Nota: simple-git permite passar opções para o comando push
-        const remoteRepo = `https://${env.GITHUB_TOKEN}@github.com/vinicu/ANTIGRAVITY_.git`;
+        const remoteRepo = `https://${env.GITHUB_TOKEN}@${env.GITHUB_REPO_URL}`;
 
         await git.add('.');
         await git.commit(commitMessage);
