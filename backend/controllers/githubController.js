@@ -16,6 +16,12 @@ exports.syncAntigravity = async (req, res) => {
         const remoteRepo = `https://${env.GITHUB_TOKEN}@${env.GITHUB_REPO_URL}`;
 
         await git.add('.');
+
+        const status = await git.status();
+        if (status.isClean()) {
+            return res.json({ success: true, message: 'Nenhuma alteração para sincronizar', commit: null });
+        }
+
         await git.commit(commitMessage);
 
         // Push para o remote configurado com o token
