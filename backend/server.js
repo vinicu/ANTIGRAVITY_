@@ -19,7 +19,11 @@ app.use((err, req, res, next) => {
 });
 
 // Inicia servidor
-app.listen(env.PORT, () => {
-    console.log(`Backend rodando na porta ${env.PORT}`);
-    console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
-});
+if (require.main === module) {
+    app.listen(env.PORT, () => {
+        console.log(`Backend rodando na porta ${env.PORT}`);
+        console.log(`Ambiente: ${process.env.NODE_ENV || 'development'}`);
+    });
+}
+
+module.exports = app;
