@@ -16,7 +16,6 @@ if (missingEnv.length > 0) {
 module.exports = {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     GITHUB_REPO_URL: process.env.GITHUB_REPO_URL,
-    CLAUDE_API_KEY: process.env.CLAUDE_API_KEY,
     DATABASE_URL: process.env.DATABASE_URL,
     JWT_SECRET: process.env.JWT_SECRET,
     PORT: process.env.PORT || 3000
