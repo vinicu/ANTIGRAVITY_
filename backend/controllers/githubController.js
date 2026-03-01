@@ -23,7 +23,11 @@ exports.syncAntigravity = async (req, res) => {
 
         res.json({ success: true, message: 'Sincronização realizada com sucesso', commit: commitMessage });
     } catch (error) {
-        console.error('Erro no sync:', error);
-        res.status(500).json({ success: false, error: 'Falha na sincronização', details: error.message });
+        let safeErrorMessage = error.message || 'Erro desconhecido';
+        if (env.GITHUB_TOKEN && typeof safeErrorMessage === 'string') {
+            safeErrorMessage = safeErrorMessage.split(env.GITHUB_TOKEN).join('***');
+        }
+        console.error('Erro no sync:', safeErrorMessage);
+        res.status(500).json({ success: false, error: 'Falha na sincronização', details: safeErrorMessage });
     }
 };
