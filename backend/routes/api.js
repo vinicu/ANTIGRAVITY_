@@ -10,5 +10,6 @@ router.get('/health', (req, res) => {
 
 // Rotas Protegidas
 router.post('/sync/antigravity', authenticateToken, githubController.syncAntigravity);
+router.get('/sync/status/:jobId', authenticateToken, githubController.getSyncStatus);
 
 module.exports = router;
