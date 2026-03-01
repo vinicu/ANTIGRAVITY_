@@ -3,7 +3,7 @@ const env = require('../config/env');
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+    const token = authHeader && authHeader.startsWith('Bearer ') ? authHeader.substring(7) : undefined; // Bearer TOKEN
 
     if (!token) {
         return res.status(401).json({ error: 'Token de autenticação não fornecido' });
