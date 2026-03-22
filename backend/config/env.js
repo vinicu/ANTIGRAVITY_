@@ -13,11 +13,18 @@ if (missingEnv.length > 0) {
     process.exit(1);
 }
 
+const parseAllowedOrigins = () => {
+    const origins = process.env.ALLOWED_ORIGINS;
+    if (!origins) return ['http://localhost:3000'];
+    return origins.split(',').map(origin => origin.trim()).filter(Boolean);
+};
+
 module.exports = {
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     GITHUB_REPO_URL: process.env.GITHUB_REPO_URL,
     CLAUDE_API_KEY: process.env.CLAUDE_API_KEY,
     DATABASE_URL: process.env.DATABASE_URL,
     JWT_SECRET: process.env.JWT_SECRET,
-    PORT: process.env.PORT || 3000
+    PORT: process.env.PORT || 3000,
+    ALLOWED_ORIGINS: parseAllowedOrigins()
 };

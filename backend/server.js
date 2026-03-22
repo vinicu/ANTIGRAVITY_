@@ -6,7 +6,19 @@ const apiRoutes = require('./routes/api');
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: function (origin, callback) {
+        // Permitir requisições sem origem (como apps mobile, Postman ou curl) dependendo da política,
+        // mas em geral restringe à lista.
+        // Se quiser bloquear completamente, remova a checagem por !origin.
+        // Aqui bloqueamos caso a origem não esteja na lista de origens confiáveis
+        if (!origin || env.ALLOWED_ORIGINS.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Bloqueado pelo CORS'));
+        }
+    }
+}));
 app.use(express.json());
 
 // Rotas
